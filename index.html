@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tic-Tac-Toe</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="position-relative bg-dark vh-100 vw-100">
+            <div id="menu">
+                <div id="score">
+                    <p>Player (X): <span id="x">0</span></p>
+                    <p>Tie: <span id="tie">0</span></p>
+                    <p>Player (O): <span id="o">0</span></p>
+                </div>
+                <button id="reset">reset</button>
+            </div>
+            <div id="game">
+                <div id="board" class="row m-0 h-100 w-100">
+                    <div class="col-4 border-end border-bottom border-5" position="00"></div>
+                    <div class="col-4 border-end border-bottom" position="01"></div>
+                    <div class="col-4 border-bottom" position="02"></div>
+                    <div class="col-4 border-end border-bottom" position="10"></div>
+                    <div class="col-4 border-end border-bottom" position="11"></div>
+                    <div class="col-4 border-bottom" position="12"></div>
+                    <div class="col-4 border-end" position="20"></div>
+                    <div class="col-4 border-end" position="21"></div>
+                    <div class="col-4" position="22"></div>
+                </div>
+            </div>
+
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="logic.js"></script>
+    </body>
+</html>
