@@ -33,13 +33,13 @@ $(document).ready(function () {
             turnCounter++
             if (turn === 1){
                 arr[row][column] = 1
-                $(object).text('X')
+                markTile(object)
                 checkWin()
                 turn = 0
             }
             else {
                 arr[row][column] = 0
-                $(object).text('O')
+                markTile(object)
                 checkWin()
                 turn = 1
             }
@@ -72,7 +72,8 @@ $(document).ready(function () {
                     O++
                     alert("O won.")
                 }
-                resetBoard()
+                setTimeout(resetBoard, 1000)
+                // resetBoard()
                 updateScore()
                 return
             }
@@ -81,17 +82,17 @@ $(document).ready(function () {
         if (turnCounter === 9){
             tie++
             alert("Tie.")
+            setTimeout(resetBoard, 1000)
             updateScore()
-            resetBoard()
         }
         // not ended yet
     }
 
     function resetBoard(){
-        $("#board > div").text("")
+        $("#board > div").removeClass("X O")
         arr = [[null, null, null], [null, null, null], [null, null, null]]
         start = !start // changes the starting player each turn
-        turn = start // X: 1, O: 0
+        turn = Number(start) // X: 1, O: 0
         turnCounter = 0
     }
 
@@ -99,6 +100,16 @@ $(document).ready(function () {
         $("#x").text(X)
         $("#o").text(O)
         $("#tie").text(tie)
+    }
+
+    function markTile(object){
+        // turn = 1 -> x
+        if (turn === 0){
+            $(object).addClass('O')
+        }
+        else if (turn === 1){
+            $(object).addClass('X')
+        }
     }
 })
 

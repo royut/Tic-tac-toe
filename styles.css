@@ -17,6 +17,19 @@ body {
     font-size: xxx-large;
 }
 
+.X {
+    background-image: url("/svg/x.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+}
+.O {
+    background-image: url("/svg/o.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+}
+
 @media screen and (max-width: 600px) {
     #game {
         height: 300px;
