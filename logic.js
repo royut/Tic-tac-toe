@@ -34,6 +34,7 @@ $(document).ready(function () {
             if (turn === 1){
                 arr[row][column] = 1
                 markTile(object)
+                animateWin(object)
                 checkWin()
                 turn = 0
             }
@@ -49,9 +50,11 @@ $(document).ready(function () {
     function checkWin(){
         for (let turn = 0; turn <= 1; turn++) {
             let win = false
+            let tiles = []
             for (let i = 0; i < 3; i++){
                 if (arr[i][0] === turn && arr[i][1] === turn && arr[i][2] === turn){
                     win = true
+                    tiles = []
                 }
                 if (arr[0][i] === turn && arr[1][i] === turn && arr[2][i] === turn){
                     win = true
@@ -89,7 +92,7 @@ $(document).ready(function () {
     }
 
     function resetBoard(){
-        $("#board > div").removeClass("X O")
+        $("#board > div").empty()
         arr = [[null, null, null], [null, null, null], [null, null, null]]
         start = !start // changes the starting player each turn
         turn = Number(start) // X: 1, O: 0
@@ -105,11 +108,17 @@ $(document).ready(function () {
     function markTile(object){
         // turn = 1 -> x
         if (turn === 0){
-            $(object).addClass('O')
+            let tile = "<div class='O h-100 w-100'></div>"
+            $(object).append(tile)
         }
         else if (turn === 1){
-            $(object).addClass('X')
+            let tile = "<div class='X h-100 w-100'></div>"
+            $(object).append(tile)
         }
     }
-})
 
+    function animateWin(object){
+        $(object).children().animate({opacity: 0.5}, 100)
+        $(object).children().animate({opacity: 1}, 100)
+    }
+})
