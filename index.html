@@ -7,16 +7,20 @@
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
     </head>
-    <body>
-        <div class="position-relative bg-dark vh-100 vw-100">
-            <div id="menu">
-                <div id="score">
-                    <p>Player (X): <span id="x">0</span></p>
-                    <p>Tie: <span id="tie">0</span></p>
-                    <p>Player (O): <span id="o">0</span></p>
+    <body class="bg-dark">
+        <div class="position-relative vh-100 vw-100">
+
+            <!-- menu -->
+            <div id="menu" class="pt-5">
+                <div id="score" class="col-3 d-flex justify-content-space-around">
+                    <div>Player (X): <span id="x">0</span></div>
+                    <div>Tie: <span id="tie">0</span></div>
+                    <div>Player (O): <span id="o">0</span></div>
                 </div>
-                <button id="reset">reset</button>
+                <button id="reset" class="col-md-1 col-sm-12">reset</button>
             </div>
+
+            <!-- game -->
             <div id="game">
                 <div id="end_reset" class="h-100 w-100"></div>
                 <div id="board" class="row m-0 h-100 w-100">
