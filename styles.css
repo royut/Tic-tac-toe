@@ -11,6 +11,15 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+#end_reset {
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+#board {
+    position: absolute;
+    z-index: 2;
+}
 #board > div {
     border-color: lightgray !important;
     border-width: 6px !important;

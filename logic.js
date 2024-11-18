@@ -25,6 +25,11 @@ $(document).ready(function () {
         resetBoard()
     })
 
+    // board restart button
+    $("#end_reset").on("click", function () {
+        resetBoard()
+    })
+
     function nextMove(object){
         let position = Number($(object).attr('position'))
         let column = position % 10
@@ -34,7 +39,6 @@ $(document).ready(function () {
             if (turn === 1){
                 arr[row][column] = 1
                 markTile(object)
-                animateWin(object)
                 checkWin()
                 turn = 0
             }
@@ -54,29 +58,30 @@ $(document).ready(function () {
             for (let i = 0; i < 3; i++){
                 if (arr[i][0] === turn && arr[i][1] === turn && arr[i][2] === turn){
                     win = true
-                    tiles = []
+                    tiles = [i+'0', i+'1', i+'2']
                 }
                 if (arr[0][i] === turn && arr[1][i] === turn && arr[2][i] === turn){
                     win = true
+                    tiles = ['0'+i, '1'+i, '2'+i]
                 }
             }
             if (arr[0][0] === turn && arr[1][1] === turn && arr[2][2] === turn){
                 win = true
+                tiles = ['00', '11', '22']
             }
             if (arr[0][2] === turn && arr[1][1] === turn && arr[2][0] === turn){
                 win = true
+                tiles = ['02', '11', '20']
             }
             if (win === true){
                 if (turn === 1){
                     X++
-                    alert("X won.")
                 }
                 else {
                     O++
-                    alert("O won.")
                 }
-                setTimeout(resetBoard, 1000)
-                // resetBoard()
+                animateWin(tiles)
+                restartBoardPopup()
                 updateScore()
                 return
             }
@@ -84,8 +89,8 @@ $(document).ready(function () {
         // check Tie
         if (turnCounter === 9){
             tie++
-            alert("Tie.")
-            setTimeout(resetBoard, 1000)
+            restartBoardPopup()
+            animateTie()
             updateScore()
         }
         // not ended yet
@@ -93,6 +98,7 @@ $(document).ready(function () {
 
     function resetBoard(){
         $("#board > div").empty()
+        $("#end_reset").css("z-index", 1)
         arr = [[null, null, null], [null, null, null], [null, null, null]]
         start = !start // changes the starting player each turn
         turn = Number(start) // X: 1, O: 0
@@ -106,19 +112,35 @@ $(document).ready(function () {
     }
 
     function markTile(object){
-        // turn = 1 -> x
+        // turn = 1 -> X
         if (turn === 0){
             let tile = "<div class='O h-100 w-100'></div>"
             $(object).append(tile)
         }
+        // turn = 0 -> O
         else if (turn === 1){
             let tile = "<div class='X h-100 w-100'></div>"
             $(object).append(tile)
         }
     }
 
-    function animateWin(object){
-        $(object).children().animate({opacity: 0.5}, 100)
-        $(object).children().animate({opacity: 1}, 100)
+    function animateWin(tiles){
+        for (let tile of tiles){
+            let object = $("[position='" + tile + "']").children()
+            object.animate({opacity: 0.2}, 100)
+            object.animate({opacity: 1}, 100)
+            object.animate({opacity: 0.2}, 100)
+            object.animate({opacity: 1}, 100)
+            object.animate({opacity: 0.2}, 100)
+            object.animate({opacity: 1}, 100)
+        }
+    }
+
+    function animateTie(){
+        // todo
+    }
+
+    function restartBoardPopup(){
+        $("#end_reset").css("z-index", 3)
     }
 })
