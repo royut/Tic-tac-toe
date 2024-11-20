@@ -5,6 +5,15 @@ body {
     display: flex;
     justify-content: center;
 }
+#score{
+    display: flex;
+    justify-content: space-around;
+    font-size: x-large;
+    text-align: center;
+}
+#score > div > p {
+    font-size: xx-large;
+}
 #game {
     position: absolute;
     top: max(350px, 50%);

@@ -80,7 +80,7 @@ $(document).ready(function () {
                 else {
                     O++
                 }
-                animateWin(tiles)
+                setTimeout(function (){animateWin(tiles)}, 200)
                 restartBoardPopup()
                 updateScore()
                 return
@@ -90,7 +90,7 @@ $(document).ready(function () {
         if (turnCounter === 9){
             tie++
             restartBoardPopup()
-            animateTie()
+            setTimeout(function (){animateTie()}, 200)
             updateScore()
         }
         // not ended yet
@@ -112,33 +112,39 @@ $(document).ready(function () {
     }
 
     function markTile(object){
-        // turn = 1 -> X
-        if (turn === 0){
-            let tile = "<div class='O h-100 w-100'></div>"
-            $(object).append(tile)
-        }
         // turn = 0 -> O
-        else if (turn === 1){
-            let tile = "<div class='X h-100 w-100'></div>"
+        if (turn === 0){
+            let tile = "<div class='O h-100 w-100' style='opacity: 0'></div>"
             $(object).append(tile)
+            $(object).children().animate({opacity: 1}, 200)
+        }
+        // turn = 1 -> X
+        else if (turn === 1){
+            let tile = "<div class='X h-100 w-100' style='opacity: 0'></div>"
+            $(object).append(tile)
+            $(object).children().animate({opacity: 1}, 200)
         }
     }
 
     function animateWin(tiles){
-        for (let tile of tiles){
-            let object = $("[position='" + tile + "']").children()
-            object.animate({opacity: 0.2}, 100)
-            object.animate({opacity: 1}, 100)
-            object.animate({opacity: 0.2}, 100)
-            object.animate({opacity: 1}, 100)
-            object.animate({opacity: 0.2}, 100)
-            object.animate({opacity: 1}, 100)
-        }
+        // reduce other tiles opacity
+        $('#board').children().children().animate({opacity: 0.2}, 100)
+        // make winning tiles blink
+        setTimeout(function (){
+            for (let tile of tiles){
+                let object = $("[position='" + tile + "']").children()
+                object.animate({opacity: 1}, 100)
+                object.animate({opacity: 0.2}, 100)
+                object.animate({opacity: 1}, 100)
+                object.animate({opacity: 0.2}, 100)
+                object.animate({opacity: 1}, 100)
+            }
+        }, 100)
     }
 
     function animateTie(){
-        // todo
-    }
+        // reduce all tiles opacity
+        $('#board').children().children().animate({opacity: 0.2}, 100)}
 
     function restartBoardPopup(){
         $("#end_reset").css("z-index", 3)
